@@ -5,8 +5,8 @@ package Base_Types is
 
    type Object is abstract tagged private;
 
-   function Create_Name (Name : String) return Object is abstract;
-   function Create_Code_SIL (Code_SIL : String) return Object is abstract;
+   function Create_Name (Item : in out Object; Name : String) return Object is abstract;
+   function Create_Code_SIL (Item : in out Object; Code_SIL : String) return Object is abstract;
 
    function Name_Value (Item : Object) return String is abstract;
    function Code_SIL_Value (Item : Object) return String is abstract;

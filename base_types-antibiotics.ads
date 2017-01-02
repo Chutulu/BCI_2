@@ -7,15 +7,17 @@ package Base_Types.Antibiotics is
 
    function Name_Value (Item : Object) return String;
    function Code_SIL_Value (Item : Object) return String;
-   function CMI_Value ( Item : Object) return String;
-   function SIR_Value ( Item : Object) return String;
+   function CMI_Value (Item : Object) return String;
+   function SIR_Value (Item : Object) return String;
 
-   function Create_Name (Name : String) return Object;
-   function Create_Code_SIL (Code_SIL : String) return Object;
-   function Create_CMI (CMI : String) return Object;
-   function Create_SIR (SIR : String) return Object;
+   overriding
+   function Create_Name (Item : in out Object; Name : String) return Object;
+   function Create_Code_SIL (Item : in out Object; Code_SIL : String) return Object;
+   function Create_CMI (Item : in out Object; CMI : String) return Object;
+   function Create_SIR (Item : in out Object; SIR : String) return Object;
 
-   function Create (Name                      : String;
+   function Create (Item                      : in out Object;
+                    Name                      : String;
                     Code_SIL                  : String;
                     CMI                       : String;
                     SIR                       : String) return Object;
