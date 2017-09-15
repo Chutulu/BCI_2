@@ -1,15 +1,15 @@
-with Generic_Segmented_Stack;
+-- with Generic_Segmented_Stack;
 package body Base_Types.Analyses.Antibiotics is
 
    Antibiotics_Class : constant String := "Antibiotics_Class";
 
-   function Get_Class (Item : Handle) return String
+   function Get_Class (Item : Deposit_Handles.Handle) return String
    is
    begin
       return Antibiotics_Class;
    end Get_Class;
 
-   function Is_Modified (Item : Handle) return Boolean is
+   function Is_Modified (Item : Deposit_Handles.Handle) return Boolean is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "Is_Modified unimplemented");
@@ -17,7 +17,7 @@ package body Base_Types.Analyses.Antibiotics is
       return Is_Modified (Item => Item);
    end Is_Modified;
 
-   procedure Reset_Modified (Item : Handle) is
+   procedure Reset_Modified (Item : Deposit_Handles.Handle) is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "Reset_Modified unimplemented");
@@ -27,7 +27,7 @@ package body Base_Types.Analyses.Antibiotics is
    procedure Store
      (Destination : in out String;
       Pointer     : in out Integer;
-      Item        : Handle)
+      Item        : Deposit_Handles.Handle)
    is
    begin
       --  Generated stub: replace with real body!

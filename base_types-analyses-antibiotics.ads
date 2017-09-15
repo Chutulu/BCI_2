@@ -1,7 +1,7 @@
 with My_Strings.Handles;
 with Strings_Edit; -- use Strings_Edit;
 with Ada.Strings.Unbounded; -- use Ada.Strings.Unbounded;
-with Deposit_Handles; use Deposit_Handles;
+with Deposit_Handles;
 
 package Base_Types.Analyses.Antibiotics is
 
@@ -12,15 +12,15 @@ package Base_Types.Analyses.Antibiotics is
    subtype CMI_Type is My_Strings.Handles.My_Safe_String;
    subtype SIR_Type is My_Strings.Handles.My_Safe_String;
 
-   function Get_Class (Item : Handle) return String;
-   function Is_Modified (Item : Handle) return Boolean;
-   procedure Reset_Modified (Item : Handle);
+   function Get_Class (Item : Deposit_Handles.Handle) return String;
+   function Is_Modified (Item : Deposit_Handles.Handle) return Boolean;
+   procedure Reset_Modified (Item : Deposit_Handles.Handle);
 
 private
 
    procedure Store (Destination : in out String;
                     Pointer     : in out Integer;
-                    Item        : Handle);
+                    Item        : Deposit_Handles.Handle);
 
    type Object is new Base_Types.Analyses.Object with
       record

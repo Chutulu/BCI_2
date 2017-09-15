@@ -7,8 +7,8 @@ with Base_Types.Analyses.Antibiotics.Handles;
 with Base_Types.Analyses.Handles;
 procedure Test is
 
+    package Analyse renames Base_Types.Analyses.Handles;
    package Antibiotic renames Base_Types.Analyses.Antibiotics.Handles;
-   package Analyse renames Base_Types.Analyses.Handles;
 
    Test_Analyse      : Analyse.Analyse_Handle;
    Test_Antibiotic   : Antibiotic.Antibiotic_Handle;

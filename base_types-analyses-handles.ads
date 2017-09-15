@@ -1,11 +1,9 @@
-with Object.Archived.Handle;
+-- with Object.Archived.Handle;
+with Deposit_Handles;
 package Base_Types.Analyses.Handles is
 
-   package Analyses_Handle is
-     new Standard.Object.Archived.Handle (Object, Analyse_Ptr);
-
    type Analyse_Handle is
-     new Analyses_Handle.Handle with null record;
+     new Deposit_Handles.Handle with null record;
 
    function Name_Value (Item : Analyse_Handle) return String;
    function LIS_Code_Value (Item : Analyse_Handle) return String;
@@ -24,8 +22,9 @@ package Base_Types.Analyses.Handles is
 
    function Image (Item : Analyse_Handle) return String;
 
+   function Ref (Pointer : Analyse_Ptr) return Analyse_Handle;
+
 private
 
-   function Ref (Pointer : Analyse_Ptr) return Analyse_Handle;
 
 end Base_Types.Analyses.Handles;

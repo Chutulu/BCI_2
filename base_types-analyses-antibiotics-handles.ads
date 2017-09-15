@@ -1,11 +1,11 @@
-with Object.Archived.Handle;
+with Deposit_Handles;
 package Base_Types.Analyses.Antibiotics.Handles is
 
-   package Antibiotics_Handle is
-     new Standard.Object.Archived.Handle (Object, Antibiotic_Ptr);
+   -- package Antibiotics_Handle is
+     -- new Standard.Object.Archived.Handle (Object, Antibiotic_Ptr);
 
    type Antibiotic_Handle is
-     new Antibiotics_Handle.Handle with null record;
+     new Deposit_Handles.Handle with null record;
 
    function Name_Value (Item : Antibiotic_Handle) return String;
    function LIS_Code_Value (Item : Antibiotic_Handle) return String;
@@ -40,8 +40,8 @@ package Base_Types.Analyses.Antibiotics.Handles is
       SIR            : String
      ) return Antibiotic_Handle;
 
-private
-
    function Ref (Pointer : Antibiotic_Ptr) return Antibiotic_Handle;
+
+private
 
 end Base_Types.Analyses.Antibiotics.Handles;

@@ -1,3 +1,4 @@
+with Object.Archived; use Object.Archived;
 package body Base_Types.Analyses.Antibiotics.Handles is
 
    --------------------
@@ -5,7 +6,7 @@ package body Base_Types.Analyses.Antibiotics.Handles is
    --------------------
    function LIS_Code_Value (Item : Antibiotic_Handle) return String
    is
-      This : Object'Class renames Ptr (Item).all;
+      This : Deposit'Class renames Ptr (Item).all;
    begin
       return My_Strings.Handles.Value (This.LIS_Code);
    end LIS_Code_Value;
@@ -15,7 +16,7 @@ package body Base_Types.Analyses.Antibiotics.Handles is
    ----------------
    function Name_Value (Item : Antibiotic_Handle) return String
    is
-      This : Object'Class renames Ptr (Item).all;
+      This : Deposit'Class renames Ptr (Item).all;
    begin
       return My_Strings.Handles.Value (This.Name);
    end Name_Value;
@@ -25,9 +26,9 @@ package body Base_Types.Analyses.Antibiotics.Handles is
    ---------------
    function CMI_Value (Item : Antibiotic_Handle) return String
    is
-      This : Object'Class renames Ptr (Item).all;
+      This : Deposit'Class renames Ptr (Item).all;
    begin
-      if This in Object'Class then
+      if This in Deposit'Class then
          return My_Strings.Handles.Value (This.CMI);
       else
          return "Unknown";
@@ -39,9 +40,9 @@ package body Base_Types.Analyses.Antibiotics.Handles is
    ---------------
    function SIR_Value (Item : Antibiotic_Handle) return String
    is
-      This : Object'Class renames Ptr (Item).all;
+      This : Deposit'Class renames Ptr (Item).all;
    begin
-      if This in Object'Class then
+      if This in Deposit'Class then
          return My_Strings.Handles.Value (This.SIR);
       else
          return "Unknown";
@@ -52,7 +53,7 @@ package body Base_Types.Analyses.Antibiotics.Handles is
    -- Image --
    -----------
    function Image (Item : Antibiotic_Handle) return String is
-      This : Object'Class renames Ptr (Item).all;
+      This : Deposit'Class renames Ptr (Item).all;
    begin
       return My_Strings.Handles.Value (This.Name) & " " &
         SIR_Value (Item) & " " & CMI_Value (Item);
@@ -65,7 +66,7 @@ package body Base_Types.Analyses.Antibiotics.Handles is
      (Item     : Antibiotic_Handle;
       LIS_Code : String
      ) is
-      This : Object'Class renames Ptr (Item).all;
+      This : Deposit'Class renames Ptr (Item).all;
    begin
       This.LIS_Code := My_Strings.Handles.Create (LIS_Code);
    end Set_LIS_Code;
@@ -77,7 +78,7 @@ package body Base_Types.Analyses.Antibiotics.Handles is
      (Item : Antibiotic_Handle;
       Name : String
      ) is
-      This : Object'Class renames Ptr (Item).all;
+      This : Deposit'Class renames Ptr (Item).all;
    begin
       This.Name := My_Strings.Handles.Create (Name);
    end Set_Name;
@@ -89,7 +90,7 @@ package body Base_Types.Analyses.Antibiotics.Handles is
      (Item     : Antibiotic_Handle;
       CMI      : String
      ) is
-      This : Object'Class renames Ptr (Item).all;
+      This : Deposit'Class renames Ptr (Item).all;
    begin
       This.CMI := My_Strings.Handles.Create (CMI);
    end Set_CMI;
@@ -101,7 +102,7 @@ package body Base_Types.Analyses.Antibiotics.Handles is
      (Item : Antibiotic_Handle;
       SIR  : String
      ) is
-      This : Object'Class renames Ptr (Item).all;
+      This : Deposit'Class renames Ptr (Item).all;
    begin
       This.SIR := My_Strings.Handles.Create (SIR);
    end Set_SIR;
@@ -116,7 +117,7 @@ package body Base_Types.Analyses.Antibiotics.Handles is
       SIR            : String
      ) return Antibiotic_Handle
    is
-      This : Antibiotic_Ptr := new Object;
+      This : Antibiotic_Ptr := new Deposit;
    begin
       This.Name := My_Strings.Handles.Create (Name);
       This.LIS_Code := My_Strings.Handles.Create (LIS_Code);
@@ -131,7 +132,7 @@ package body Base_Types.Analyses.Antibiotics.Handles is
    function Ref (Pointer : Antibiotic_Ptr) return Antibiotic_Handle
    is
    begin
-      return (Antibiotics_Handle.Ref (Pointer) with null record);
+      return (Antibiotic_Handle.Ref (Pointer) with null record);
    end Ref;
 
 end Base_Types.Analyses.Antibiotics.Handles;

@@ -6,7 +6,7 @@ package body Base_Types.Analyses.Handles is
    --------------------
    function LIS_Code_Value (Item : Analyse_Handle) return String
    is
-      This : Object'Class renames Ptr (Item).all;
+      This : Deposit'Class renames Ptr (Item).all;
    begin
       if This in Object'Class then
          return My_Strings.Handles.Value (This.LIS_Code);
@@ -20,7 +20,7 @@ package body Base_Types.Analyses.Handles is
    ----------------
    function Name_Value (Item : Analyse_Handle) return String
    is
-      This : Object'Class renames Ptr (Item).all;
+      This : Deposit'Class renames Ptr (Item).all;
    begin
       if This in Object'Class then
          return My_Strings.Handles.Value (This.Name);
@@ -79,7 +79,7 @@ package body Base_Types.Analyses.Handles is
    function Ref (Pointer : Analyse_Ptr) return Analyse_Handle
    is
    begin
-      return (Analyses_Handle.Ref (Pointer) with null record);
+      return (Analyse_Handle.Ref (Pointer) with null record);
    end Ref;
 
 end Base_Types.Analyses.Handles;

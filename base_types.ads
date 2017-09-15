@@ -7,6 +7,7 @@ package Base_Types is
    subtype LIS_Code_Type is My_Strings.Handles.My_Safe_String;
 
    type Object is abstract new Standard.Object.Archived.Deposit with private;
+   type Base_Type_Ptr is access Object'Class;
 
    function Name_Value (Item : Deposit_Handles.Handle) return String is abstract;
 
@@ -62,5 +63,7 @@ private
          Name     : Name_Type;
          LIS_Code : LIS_Code_Type;
       end record;
+
+function Ref (Pointer : Base_Type_Ptr) return Deposit_Handles.Handle is abstract;
 
 end Base_Types;
