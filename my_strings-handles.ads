@@ -1,27 +1,27 @@
 with Object.Handle;
 
-package My_Strings.Handle is
+package My_Strings.Handles is
    --
    -- Though an instantiation of Object.Handle provides handles to
    -- My_String, we would like to have some additional operations on
    -- handles.
    --
-   package My_String_Handle is
+   package My_String_Handles is
      new Object.Handle (My_String, My_String_Ptr);
    --
    -- So we immediately derive from the obtained type. Note that no
    -- additional components needed (with null record).
    --
    type My_Safe_String is
-     new My_String_Handle.Handle with null record;
+     new My_String_Handles.Handle with null record;
    --
    -- Now define useful operations on string handles:
    --
 
    function Create (Value : String) return My_Safe_String;
 
-   function "+" (Value : String) return My_Strings.Handle.My_Safe_String
-                 renames My_Strings.Handle.Create;
+   function "+" (Value : String) return My_Strings.Handles.My_Safe_String
+                 renames My_Strings.Handles.Create;
 
    function Value (Reference : My_Safe_String) return String;
    --
@@ -43,4 +43,4 @@ private
    --
    function Ref (Pointer : My_String_Ptr) return My_Safe_String;
 
-end My_Strings.Handle;
+end My_Strings.Handles;

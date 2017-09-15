@@ -3,49 +3,13 @@ package body Base_Types.Analyses.Antibiotics is
 
    Antibiotics_Class : constant String := "Antibiotics_Class";
 
-   function CMI_Value (Item : Object) return String
-   is
-   begin
-      return My_Strings.Handle.Value (Item.CMI);
-   end CMI_Value;
-
-   function SIR_Value (Item : Object) return String
-   is
-   begin
-      return My_Strings.Handle.Value (Item.SIR);
-   end SIR_Value;
-
-   procedure Set_CMI (Item : in out Object; CMI : String)
-   is
-   begin
-      Item.CMI := My_Strings.Handle.Create (Value => CMI);
-   end Set_CMI;
-
-   procedure Set_SIR (Item : in out Object; SIR : String)
-   is
-   begin
-      Item.SIR := My_Strings.Handle.Create (Value => SIR);
-   end Set_SIR;
-
-   procedure Make (Item           : in out Object;
-                   Name           : String;
-                   LIS_Code       : String;
-                   CMI            : String;
-                   SIR            : String)
-   is
-   begin
-      Base_Types.Analyses.Make(Base_Types.Analyses.Object(Item), Name, LIS_Code);
-      Item.CMI := My_Strings.Handle.Create (CMI);
-      Item.SIR := My_Strings.Handle.Create (SIR);
-   end Make;
-
-   function Get_Class (Item : Object) return String
+   function Get_Class (Item : Handle) return String
    is
    begin
       return Antibiotics_Class;
    end Get_Class;
 
-   function Is_Modified (Item : Object) return Boolean is
+   function Is_Modified (Item : Handle) return Boolean is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "Is_Modified unimplemented");
@@ -53,7 +17,7 @@ package body Base_Types.Analyses.Antibiotics is
       return Is_Modified (Item => Item);
    end Is_Modified;
 
-   procedure Reset_Modified (Item : in out Object) is
+   procedure Reset_Modified (Item : Handle) is
    begin
       --  Generated stub: replace with real body!
       pragma Compile_Time_Warning (Standard.True, "Reset_Modified unimplemented");
@@ -63,7 +27,7 @@ package body Base_Types.Analyses.Antibiotics is
    procedure Store
      (Destination : in out String;
       Pointer     : in out Integer;
-      Item        : Object)
+      Item        : Handle)
    is
    begin
       --  Generated stub: replace with real body!

@@ -1,4 +1,4 @@
-package body My_Strings.Handle is
+package body My_Strings.Handles is
 
    function Create (Value : String) return My_Safe_String
    is
@@ -31,7 +31,7 @@ package body My_Strings.Handle is
    function Ref (Pointer : My_String_Ptr) return My_Safe_String
    is
    begin
-      return (My_String_Handle.Ref (Pointer) with null record);
+      return (My_String_Handles.Ref (Pointer) with null record);
    end Ref;
 
-end My_Strings.Handle;
+end My_Strings.Handles;

@@ -1,26 +1,64 @@
-with My_Strings.Handle;
-with Object.Archived.Handle;
+with My_Strings.Handles;
+with Deposit_Handles; use Deposit_Handles;
+with Object.Archived; use Object.Archived;
 
 package Base_Types is
 
-   package Obj_Rename renames Object;
+   subtype Name_Type is My_Strings.Handles.My_Safe_String;
+   subtype LIS_Code_Type is My_Strings.Handles.My_Safe_String;
 
-   subtype Name_Type is My_Strings.Handle.My_Safe_String;
-   subtype LIS_Code_Type is My_Strings.Handle.My_Safe_String;
+   type Object is abstract new Standard.Object.Archived.Deposit with private;
 
-   type Object is abstract new Obj_Rename.Archived.Deposit with private;
+   function Name_Value (Item : Handle) return String is abstract;
 
-   function Name_Value (Item : Object) return String is abstract;
-   function LIS_Code_Value (Item : Object) return String is abstract;
+   function LIS_Code_Value (Item : Handle) return String is abstract;
 
-   procedure Set_Name (Item : in out Object; Name : String) is abstract;
-   procedure Set_LIS_Code (Item : in out Object; LIS_Code : String)is abstract;
+   procedure Set_Name
+     (Item : Handle;
+      Name : String
+     ) is abstract;
 
-   procedure Make (Item : in out Object; Name : String; LIS_Code : String)is abstract;
+   procedure Set_LIS_Code
+     (Item     : Handle;
+      LIS_Code : String
+     ) is abstract;
+
+   procedure Make
+     (Item     : Handle;
+      Name     : String;
+      LIS_Code : String
+     ) is abstract;
+
+   function Image (Item : Handle) return String is abstract;
+
+   function Get_Class (Item : Object) return String is abstract;
+
+   procedure Get_Referents
+     (Item      : Object;
+      Container : in out Deposit_Container'Class
+     ) is abstract;
+
+   function Is_Modified (Item : Object) return Boolean is abstract;
+
+   procedure Reset_Modified (Item : in out Object) is abstract;
+
+   procedure Restore_Object
+     (Source  : String;
+      Pointer : in out Integer;
+      Class   : String;
+      List    : Deposit_Container'Class;
+      Item    : out Deposit_Ptr
+     ) is abstract;
+
+   procedure Store
+     (Destination : in out String;
+      Pointer     : in out Integer;
+      Item        : Object
+     ) is abstract;
 
 private
 
-   type Object is abstract new Obj_Rename.Archived.Deposit with
+   type Object is abstract new Standard.Object.Archived.Deposit with
       record
          Name     : Name_Type;
          LIS_Code : LIS_Code_Type;

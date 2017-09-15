@@ -1,89 +1,97 @@
 with Ada.Text_IO;
 with Ada.Exceptions;
 
-with Gnat.Traceback.Symbolic; use Gnat;
+with GNAT.Traceback.Symbolic; use GNAT;
 
-with Base_Types.Analyses.Antibiotics;
---with Analyses.Antibiotics.Handle;
---with My_Strings;
---with My_Strings.Handle;
-
+with Base_Types.Analyses.Antibiotics.Handles;
+with Base_Types.Analyses.Handles;
 procedure Test is
 
-   Test_Antibiotic : Base_Types.Analyses.Antibiotics.Object;
-   Test_Antibiotic_2:Base_Types.Analyses.Antibiotics.Object;
+   package Antibiotic renames Base_Types.Analyses.Antibiotics.Handles;
+   package Analyse renames Base_Types.Analyses.Handles;
+
+   Test_Analyse      : Analyse.Analyse_Handle;
+   Test_Antibiotic   : Antibiotic.Antibiotic_Handle;
+   Test_Antibiotic_2 : Antibiotic.Antibiotic_Handle;
 
 begin
 
-   Test_Antibiotic.Make (Name     => "Test Antibiotic 1",
-                         LIS_Code => "123",
-                         CMI      => "1",
-                         SIR      => "S");
+   Ada.Text_IO.Put_Line ("Before Create");
 
-   Test_Antibiotic_2.Make (Name     => "Test Antibiotic ",
-                           LIS_Code => "abc",
-                           CMI      => "24",
-                           SIR      => "R");
+   Test_Analyse := Analyse.Make (Name     => "Test Analyse",
+                                  LIS_Code => "Tada");
+
+   Ada.Text_IO.Put_Line ("after Create");
+   Ada.Text_IO.Put_Line (Analyse.Name_Value (Test_Analyse)
+                         & " " & Analyse.LIS_Code_Value (Test_Analyse));
+
+   Ada.Text_IO.Put_Line ("modify after Create");
+
+   Analyse.Set_Name (Test_Analyse, "New Name");
+   Ada.Text_IO.Put_Line (Analyse.Image (Test_Analyse));
+
+   Ada.Text_IO.Put_Line ("Before Make");
+   Test_Antibiotic := Antibiotic.Make (Name     => "Test Antibiotic 1",
+                                       LIS_Code => "123",
+                                       CMI      => "1",
+                                       SIR      => "S");
+
+   Test_Antibiotic_2 := Antibiotic.Make (Name     => "Test Antibiotic 2",
+                                         LIS_Code => "abc",
+                                         CMI      => "24",
+                                         SIR      => "R");
+
+   Ada.Text_IO.Put_Line ("After Make");
 
    Ada.Text_IO.Put_Line ("Test record run 1:");
    Ada.Text_IO.New_Line;
 
    Ada.Text_IO.Put_Line ("Test_Antibiotic");
-   Ada.Text_IO.Put_Line ("Name: " & Test_Antibiotic.Name_Value);
-   Ada.Text_IO.Put_Line ("Code SIL: " & Test_Antibiotic.LIS_Code_Value);
-   Ada.Text_IO.Put_Line ("CMI: " & Test_Antibiotic.CMI_Value);
-   Ada.Text_IO.Put_Line ("SIR: " & Test_Antibiotic.SIR_Value);
+   Ada.Text_IO.Put_Line ("Name: " & Antibiotic.Name_Value (Test_Antibiotic));
+   Ada.Text_IO.Put_Line ("Code SIL: " & Antibiotic.LIS_Code_Value (Test_Antibiotic));
+   Ada.Text_IO.Put_Line ("CMI: " & Antibiotic.CMI_Value (Test_Antibiotic));
+   Ada.Text_IO.Put_Line ("SIR: " & Antibiotic.SIR_Value (Test_Antibiotic));
    Ada.Text_IO.New_Line;
 
    Ada.Text_IO.Put_Line ("Test record run 2:");
    Ada.Text_IO.New_Line;
 
-   Test_Antibiotic.Set_Name ("Test Antibiotic 2");
-   Ada.Text_IO.Put_Line ("Test_Antibiotic");
-   Ada.Text_IO.Put_Line ("Name: " & Test_Antibiotic.Name_Value);
+   Antibiotic.Set_Name (Item => Test_Antibiotic, Name => "Test Antibiotic => 2");
+   Ada.Text_IO.Put_Line ("Name: " & Antibiotic.Name_Value (Test_Antibiotic));
 
-   Test_Antibiotic.Set_LIS_Code (LIS_Code => "amc");
-   Ada.Text_IO.Put_Line ("Test_Antibiotic");
-   Ada.Text_IO.Put_Line ("Code SIL: " & Test_Antibiotic.LIS_Code_Value);
+   Antibiotic.Set_LIS_Code (Item => Test_Antibiotic, LIS_Code => "amc");
+   Ada.Text_IO.Put_Line ("Code SIL: " & Antibiotic.LIS_Code_Value (Test_Antibiotic));
 
-   Test_Antibiotic.Set_CMI (CMI => "2");
-   Ada.Text_IO.Put_Line ("Test_Antibiotic");
-   Ada.Text_IO.Put_Line ("CMI: " & Test_Antibiotic.CMI_Value);
-
-   Test_Antibiotic.Set_SIR (SIR => "R");
-   Ada.Text_IO.Put_Line ("Test_Antibiotic");
-   Ada.Text_IO.Put_Line ("SIR: " & Test_Antibiotic.SIR_Value);
+   Antibiotic.Set_CMI (Item => Test_Antibiotic, CMI => "2");
+   Ada.Text_IO.Put_Line ("CMI: " & Antibiotic.CMI_Value (Test_Antibiotic));
+   Antibiotic.Set_SIR (Item => Test_Antibiotic, SIR => "R");
+   Ada.Text_IO.Put_Line ("SIR: " & Antibiotic.SIR_Value (Test_Antibiotic));
    Ada.Text_IO.New_Line;
 
    Ada.Text_IO.Put_Line ("Test record run 3:");
    Ada.Text_IO.New_Line;
 
-   Test_Antibiotic.Set_Name (Name => "Test Antibiotic 3");
-   Test_Antibiotic.Set_LIS_Code (LIS_Code => "gen");
-   Test_Antibiotic.Set_CMI (CMI => "8");
-   Test_Antibiotic.Set_SIR (SIR => "I");
+   Antibiotic.Set_Name (Item => Test_Antibiotic, Name => "Test Antibiotic 3");
+   Antibiotic.Set_LIS_Code (Item => Test_Antibiotic, LIS_Code => "gen");
+   Antibiotic.Set_CMI (Item => Test_Antibiotic, CMI => "8");
+   Antibiotic.Set_SIR (Item => Test_Antibiotic, SIR => "I");
 
    Ada.Text_IO.Put_Line ("Print run 3:");
 
    Ada.Text_IO.Put_Line ("Test_Antibiotic");
-   Ada.Text_IO.Put_Line ("Name: " & Test_Antibiotic.Name_Value);
-   Ada.Text_IO.Put_Line ("Code SIL: " & Test_Antibiotic.LIS_Code_Value);
-   Ada.Text_IO.Put_Line ("CMI: " & Test_Antibiotic.CMI_Value);
-   Ada.Text_IO.Put_Line ("SIR: " & Test_Antibiotic.SIR_Value);
+   Ada.Text_IO.Put_Line ("Name: " & Antibiotic.Name_Value (Test_Antibiotic));
+   Ada.Text_IO.Put_Line ("Code SIL: " & Antibiotic.LIS_Code_Value (Test_Antibiotic));
+   Ada.Text_IO.Put_Line ("CMI: " & Antibiotic.CMI_Value (Test_Antibiotic));
+   Ada.Text_IO.Put_Line ("SIR: " & Antibiotic.SIR_Value (Test_Antibiotic));
 
    Ada.Text_IO.Put_Line ("Print run 4:");
 
-   Ada.Text_IO.Put_Line ("Test_Antibiotic");
-   Ada.Text_IO.Put_Line ("Name: " & Test_Antibiotic.Name_Value);
-   Ada.Text_IO.Put_Line ("Code SIL: " & Test_Antibiotic.LIS_Code_Value);
-   Ada.Text_IO.Put_Line ("CMI: " & Test_Antibiotic.CMI_Value);
-   Ada.Text_IO.Put_Line ("SIR: " & Test_Antibiotic.SIR_Value);
-   ada.Text_IO.New_Line;
+   Ada.Text_IO.New_Line;
    Ada.Text_IO.Put_Line ("Test_Antibiotic_2");
-   Ada.Text_IO.Put_Line ("Name: " & Test_Antibiotic_2.Name_Value);
-   Ada.Text_IO.Put_Line ("Code SIL: " & Test_Antibiotic_2.LIS_Code_Value);
-   Ada.Text_IO.Put_Line ("CMI: " & Test_Antibiotic_2.CMI_Value);
-   Ada.Text_IO.Put_Line ("SIR: " & Test_Antibiotic_2.SIR_Value);
+   Ada.Text_IO.Put_Line ("Name: " & Antibiotic.Name_Value (Test_Antibiotic_2));
+   Ada.Text_IO.Put_Line ("Code SIL: " & Antibiotic.LIS_Code_Value (Test_Antibiotic_2));
+   Ada.Text_IO.Put_Line ("CMI: " & Antibiotic.CMI_Value (Test_Antibiotic_2));
+   Ada.Text_IO.Put_Line ("SIR: " & Antibiotic.SIR_Value (Test_Antibiotic_2));
 
 exception
 
