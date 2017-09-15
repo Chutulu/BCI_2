@@ -1,4 +1,3 @@
-
 package body Base_Types.Analyses is
 
    Analyses_Class : constant String := "Analyses_Class";
