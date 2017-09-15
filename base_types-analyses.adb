@@ -17,7 +17,7 @@ package body Base_Types.Analyses is
    -------------------
    overriding procedure Get_Referents
      (Item      : Object;
-      Container : in out Deposit_Container'Class
+      Container : in out Standard.Object.Archived.Deposit_Container'Class
      ) is
    begin
       --  Generated stub: replace with real body!
@@ -53,8 +53,8 @@ package body Base_Types.Analyses is
      (Source  : String;
       Pointer : in out Integer;
       Class   : String;
-      List    : Deposit_Container'Class;
-      Item    : out Deposit_Ptr
+      List    : Standard.Object.Archived.Deposit_Container'Class;
+      Item    : out Standard.Object.Archived.Deposit_Ptr
      ) is
    begin
       --  Generated stub: replace with real body!

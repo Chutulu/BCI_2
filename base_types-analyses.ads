@@ -10,7 +10,7 @@ private
 
    overriding procedure Get_Referents
      (Item      : Object;
-      Container : in out Deposit_Container'Class
+      Container : in out Standard.Object.Archived.Deposit_Container'Class
      );
 
    overriding function Is_Modified (Item : Object) return Boolean;
@@ -21,8 +21,8 @@ private
      (Source  : String;
       Pointer : in out Integer;
       Class   : String;
-      List    : Deposit_Container'Class;
-      Item    : out Deposit_Ptr
+      List    : Standard.Object.Archived.Deposit_Container'Class;
+      Item    : out Standard.Object.Archived.Deposit_Ptr
      );
 
    overriding procedure Store
