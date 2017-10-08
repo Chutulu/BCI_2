@@ -9,7 +9,7 @@ package body Base_Types.Analyses.Handles is
       This : Object'Class renames Ptr (Item).all;
    begin
       if This in Object'Class then
-         return My_Strings.Handles.Value (This.LIS_Code);
+         return LIS_Codes.Handles.Value (This.LIS_Code);
       else
          return "Unknown";
       end if;
@@ -38,7 +38,7 @@ package body Base_Types.Analyses.Handles is
      ) is
       This : Object'Class renames Ptr (Item).all;
    begin
-      This.LIS_Code := My_Strings.Handles.Create (LIS_Code);
+      This.LIS_Code := LIS_Codes.Handles.Create (LIS_Code);
    end Set_LIS_Code;
 
    --------------
@@ -61,7 +61,7 @@ package body Base_Types.Analyses.Handles is
       This : Analyse_Ptr := new Object;
    begin
       This.Name := My_Strings.Handles.Create (Name);
-      This.LIS_Code := My_Strings.Handles.Create (LIS_Code);
+      This.LIS_Code := LIS_Codes.Handles.Create (LIS_Code);
       return Ref (This);
    end Make;
 
@@ -79,7 +79,7 @@ package body Base_Types.Analyses.Handles is
    function Ref (Pointer : Analyse_Ptr) return Analyse_Handle
    is
    begin
-      return (Analyses_Handle.Ref (Pointer) with null record);
+      return (Analyses_Handles.Ref (Pointer) with null record);
    end Ref;
 
 end Base_Types.Analyses.Handles;

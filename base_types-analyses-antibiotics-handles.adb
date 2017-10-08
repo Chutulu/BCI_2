@@ -7,7 +7,7 @@ package body Base_Types.Analyses.Antibiotics.Handles is
    is
       This : Object'Class renames Ptr (Item).all;
    begin
-      return My_Strings.Handles.Value (This.LIS_Code);
+      return LIS_Codes.Handles.Value (This.LIS_Code);
    end LIS_Code_Value;
 
    ----------------
@@ -67,7 +67,7 @@ package body Base_Types.Analyses.Antibiotics.Handles is
      ) is
       This : Object'Class renames Ptr (Item).all;
    begin
-      This.LIS_Code := My_Strings.Handles.Create (LIS_Code);
+      This.LIS_Code := LIS_Codes.Handles.Create (LIS_Code);
    end Set_LIS_Code;
 
    --------------
@@ -119,7 +119,7 @@ package body Base_Types.Analyses.Antibiotics.Handles is
       This : Antibiotic_Ptr := new Object;
    begin
       This.Name := My_Strings.Handles.Create (Name);
-      This.LIS_Code := My_Strings.Handles.Create (LIS_Code);
+      This.LIS_Code := LIS_Codes.Handles.Create (LIS_Code);
       This.CMI := My_Strings.Handles.Create (CMI);
       This.SIR := My_Strings.Handles.Create (SIR);
       return Ref (This);
@@ -131,7 +131,7 @@ package body Base_Types.Analyses.Antibiotics.Handles is
    function Ref (Pointer : Antibiotic_Ptr) return Antibiotic_Handle
    is
    begin
-      return (Antibiotics_Handle.Ref (Pointer) with null record);
+      return (Antibiotics_Handles.Ref (Pointer) with null record);
    end Ref;
 
 end Base_Types.Analyses.Antibiotics.Handles;

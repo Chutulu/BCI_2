@@ -1,8 +1,15 @@
-package Base_Types.Analyses is
+with Deposit_Handles;
+with Object.Archived;
 
-   type Object is new Base_Types.Object with null record;
+package LIS_Codes is
 
-   type Analyse_Ptr is access Object'Class;
+   type Object (Length : Natural)
+   is
+     new Standard.Object.Archived.Deposit with record
+      Code : String (1 .. Length);
+   end record;
+
+   type LIS_Code_Ptr is access Object'Class;
 
    overriding function Get_Class (Item : Object) return String;
 
@@ -14,6 +21,8 @@ package Base_Types.Analyses is
    overriding function Is_Modified (Item : Object) return Boolean;
 
    overriding procedure Reset_Modified (Item : in out Object);
+
+   --procedure Add (List: Deposit_Handles.Handle; Element: Deposit_Handles.Handle);
 
    procedure Restore_Object
      (Source  : String;
@@ -28,5 +37,5 @@ package Base_Types.Analyses is
       Pointer     : in out Integer;
       Item        : Object
      );
-
-end Base_Types.Analyses;
+private
+end LIS_Codes;

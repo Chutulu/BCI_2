@@ -1,25 +1,18 @@
+with LIS_Codes.Handles;
 with My_Strings.Handles;
 with Deposit_Handles;
 with Object.Archived;
 package Base_Types is
 
    subtype Name_Type is My_Strings.Handles.My_Safe_String;
-   subtype LIS_Code_Type is My_Strings.Handles.My_Safe_String;
 
    type Object is abstract new Standard.Object.Archived.Deposit with private;
 
    function Name_Value (Item : Deposit_Handles.Handle) return String is abstract;
 
-   function LIS_Code_Value (Item : Deposit_Handles.Handle) return String is abstract;
-
    procedure Set_Name
      (Item : Deposit_Handles.Handle;
       Name : String
-     ) is abstract;
-
-   procedure Set_LIS_Code
-     (Item     : Deposit_Handles.Handle;
-      LIS_Code : String
      ) is abstract;
 
    procedure Make
@@ -60,7 +53,7 @@ private
    type Object is abstract new Standard.Object.Archived.Deposit with
       record
          Name     : Name_Type;
-         LIS_Code : LIS_Code_Type;
+         LIS_Code : LIS_Codes.Handles.LIS_Code;
       end record;
 
 end Base_Types;

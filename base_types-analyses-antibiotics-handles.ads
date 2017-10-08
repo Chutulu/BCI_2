@@ -1,11 +1,11 @@
 with Object.Archived.Handle;
 package Base_Types.Analyses.Antibiotics.Handles is
 
-   package Antibiotics_Handle is
+   package Antibiotics_Handles is
      new Standard.Object.Archived.Handle (Object, Antibiotic_Ptr);
 
    type Antibiotic_Handle is
-     new Antibiotics_Handle.Handle with null record;
+     new Antibiotics_Handles.Handle with null record;
 
    function Name_Value (Item : Antibiotic_Handle) return String;
    function LIS_Code_Value (Item : Antibiotic_Handle) return String;
